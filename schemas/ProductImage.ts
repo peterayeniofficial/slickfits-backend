@@ -18,6 +18,7 @@ export const ProductImage = list({
       label: "source",
     }),
     altText: text(),
+    product: relationship({ ref: "Product.photo" }),
     // add roles and orders
   },
 });

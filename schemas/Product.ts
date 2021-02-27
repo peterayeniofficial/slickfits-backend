@@ -24,6 +24,16 @@ export const Product = list({
       },
     }),
     price: integer(),
+    photo: relationship({
+      ref: "ProductImage.product",
+      u: {
+        displayMode: "cards",
+        cardFields: ["image", "altText"],
+        inlineCreate: { fields: ["image", "altText"] },
+        inlineEdit: { fields: ["image", "altText"] },
+      },
+    }),
+
     // add roles and orders
   },
 });

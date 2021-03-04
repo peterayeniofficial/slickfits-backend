@@ -33,6 +33,12 @@ export const Product = list({
         inlineEdit: { fields: ["image", "altText"] },
       },
     }),
+    // user: relationship({
+    //   ref: "User.products",
+    //   defaultValue: ({ context }) => ({
+    //     connect: { id: context.session.itemId },
+    //   }),
+    // }),
 
     // add roles and orders
   },

@@ -8,6 +8,18 @@ export const User = list({
     name: text({ isRequired: true }),
     email: text({ isRequired: true, isUnique: true }),
     password: password(),
+    cart: relationship({
+      ref: "CartItem.user",
+      many: true,
+      ui: {
+        createView: { fieldMode: "hidden" },
+        itemView: { fieldMode: "read" },
+      },
+    }),
+    // products: relationship({
+    //   ref: "Product.user",
+    //   many: true,
+    // }),
     // add roles and orders
   },
 });

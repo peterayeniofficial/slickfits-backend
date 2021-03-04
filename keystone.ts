@@ -9,6 +9,9 @@ import { User } from "./schemas/User";
 import { Product } from "./schemas/Product";
 import { ProductImage } from "./schemas/ProductImage";
 import { insertSeedData } from "./seed-data";
+import { sendPasswordResetEmail } from "./lib/mail";
+import { CartItem } from "./schemas/CartItem";
+import { extendGraphqlSchema } from "./mutations";
 
 const databaseURL = process.env.DATABASE_URL;
 
@@ -24,6 +27,12 @@ const { withAuth } = createAuth({
   initFirstItem: {
     fields: ["name", "email", "password"],
     // Todo: add initial roles here
+  },
+  passwordResetLink: {
+    async sendToken(args) {
+      await sendPasswordResetEmail(args.token, args.identity);
+      console.log(args);
+    },
   },
 });
 
@@ -50,7 +59,9 @@ export default withAuth(
       User,
       Product,
       ProductImage,
+      CartItem,
     }),
+    extendGraphqlSchema,
     ui: {
       // show the UI for people who pass the test
       isAccessAllowed: ({ session }) => {

@@ -12,6 +12,8 @@ import { insertSeedData } from "./seed-data";
 import { sendPasswordResetEmail } from "./lib/mail";
 import { CartItem } from "./schemas/CartItem";
 import { extendGraphqlSchema } from "./mutations";
+import { Order } from "./schemas/Order";
+import { OrderItem } from "./schemas/OrderItem";
 
 const databaseURL = process.env.DATABASE_URL;
 
@@ -60,6 +62,8 @@ export default withAuth(
       Product,
       ProductImage,
       CartItem,
+      Order,
+      OrderItem,
     }),
     extendGraphqlSchema,
     ui: {
